@@ -20,9 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('projects', [ProjectController::class, 'index']);
-
-// Route::post('register', [AuthController::class, 'register']);
-
+Route::get('projects/{id}', [ProjectController::class, 'show']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware(["auth:sanctum"])->group(function (){
