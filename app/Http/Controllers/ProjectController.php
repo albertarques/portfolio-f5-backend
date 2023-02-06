@@ -69,9 +69,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($id)
     {
         //
+        $project = Project::find($id);
+        return $project;
     }
 
     /**
@@ -95,6 +97,25 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         //
+        $request->validate([
+            'title' => 'required',
+            'picture_cover' => 'required',
+            'picture_1' => 'required',
+            'picture_2' => 'required',
+            'picture_3' => 'required',
+            'description' => 'required',
+        ]);
+
+        $project->title = $request->title;
+        $project->picture_cover = $request->picture_cover;
+        $project->picture_1 = $request->picture_1;
+        $project->picture_2 = $request->picture_2;
+        $project->picture_3 = $request->picture_3;
+        $project->description = $request->description;
+        $project->update();
+
+        return $project;
+
     }
 
     /**
@@ -106,5 +127,15 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+        if(is_null($project)){
+
+            return response()->json('No se pudo realizar la petición, el archivo ya no existe', 404);
+        }
+
+        $project->delete();
+
+
+        return response()->noContent();
+
     }
 }
