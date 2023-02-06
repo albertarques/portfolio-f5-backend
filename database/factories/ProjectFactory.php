@@ -18,12 +18,12 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->text($maxNbChars = 150),
-            'picture_cover' => fake()->image(),
-            'picture_1' => fake()->image(),
-            'picture_2' => fake()->image(),
-            'picture_3' => fake()->image(),
-            'description' => fake()->text($maxNbChars = 300),
+            'title' => fake()->text($maxNbChars = 25),
+            'picture_cover' => fake()->imageUrl($width = 450, $height = 600),
+            'picture_1' => fake()->imageUrl($width = 450, $height = 600),
+            'picture_2' => fake()->imageUrl(),
+            'picture_3' => fake()->imageUrl(),
+            'description' => fake()->text($maxNbChars = 250),
         ];
     }
 }
